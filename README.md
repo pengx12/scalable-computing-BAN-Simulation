@@ -120,7 +120,7 @@ Steps For Creating the Sensors run the following commands:
 
 ## Detailed Project Description:
 
-#### Possible Scenario:
+### Possible Scenario:
 We have (3 or 4) instances implementing BAN and another implementing some processing machine like the device connected to the home doctor.
 In processing instance, we use 4 normal entities and 4 alarm entities to receive and process data from patients and give notification or alarm to the doctor. They have different energy and duty cycle and QoS. We separate different personal data to different sensors for security consideration. In that way, they have no chance to get approach to others’ sensitive data.
 In BAN instance, we use 9 local entities to represent sensors and 1 to represent sink as a personal server to process data and send it to Internet.
