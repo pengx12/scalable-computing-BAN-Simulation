@@ -118,13 +118,13 @@ Steps For Creating the Sensors run the following commands:
 	* ```SELECT alertBodyTemperature, alertEEG , alertBloodPressure, alertHemoglobin, alertInsulin AS message FROM 'scalable/sink/email/alert'```
 	* Create Rule.
 
-### Detailed Project Description:
+## Detailed Project Description:
 
 #### Possible Scenario:
 We have (3 or 4) instances implementing BAN and another implementing some processing machine like the device connected to the home doctor.
 In processing instance, we use 4 normal entities and 4 alarm entities to receive and process data from patients and give notification or alarm to the doctor. They have different energy and duty cycle and QoS. We separate different personal data to different sensors for security consideration. In that way, they have no chance to get approach to others’ sensitive data.
 In BAN instance, we use 9 local entities to represent sensors and 1 to represent sink as a personal server to process data and send it to Internet.
-#### BAN Intra-network
+### BAN Intra-network:
 In the body area inner network, we use 9 local entities to represent different sensors (like ECG, EEG) and 1 to represent sink as a personal server to process data and send it to receiver instance. So, we place sink in the center of the human body. Considering energy consumption and node availability, we implement the transmission protocol based on LAEEBA. 
 We divide the sensors into two categories: extremely significant ones (ECG, EEG, etc.) and not so important ones (body temperature sensor, blood pressure sensor, etc.). For the former kind of sensors, we let it transmit to sink directly while all other ordinary sensors form a peer to peer multi-hop network to save energy. Specifically, if the data is abnormal and needs to warn somebody, it will also be transmitted directly to sink.
 #### In this way we solve the challenges below:
@@ -151,7 +151,7 @@ Every device in the system is bond to a specific certificate.
 The data only transforms in local network, so it has greater privacy and security.
 In the network, the ID and status is always checked in every connection.
 If a delay node has too many linked nodes and transmit for them for a long time, it may become hot and cause damage to human being. So, we will check its status and change the delay node to another one.
-#### BAN Inter-network
+### BAN Inter-network:
 In practice, We use 4 IoT instances as 4 different BAN devices related to patients and another to represent receiving and processing machine (In our scenario it is connected to the home doctor). Once there is something wrong, the doctor will be notified to take measures. Here we use AWS Simple Notification Services to send email as a simulation. The peer-to-peer routing protocol is similar to the implementation method in BAN inner-network. 
 * #### Security and Privacy
 In processing instance, we use 5 normal entities and 5 alarm entities to receive and process normal data and alarm data (if some indicator is out of normal range) separately. Normal entities only receive and store daily health data regularly. While alarm entities handle those abnormal messages and send it immediately to the doctor. The process is separated to guarantee stability.
